@@ -33,13 +33,13 @@ export default function SignUpForm() {
 
   const router = useRouter();
   const { toast } = useToast();
-
-  const form = useForm<z.infer<typeof signUpSchema>>({
+  
+  const form = useForm({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
-      username: '',
-      email: '',
-      password: '',
+      username: "",  // Empty string to avoid null
+      email: "",     // Empty string to avoid null
+      password: "",  // Empty string to avoid null
     },
   });
 
@@ -68,7 +68,11 @@ export default function SignUpForm() {
   }, [username]);
 
   const onSubmit = async (data: z.infer<typeof signUpSchema>) => {
-    setIsSubmitting(true);
+    const finalData = {
+      username: data.username ?? "",  // Ensure username is not null
+      email: data.email ?? "",        // Ensure email is not null
+      password: data.password ?? "",  // Ensure password is not null
+    };
     try {
       const response = await axios.post<ApiResponse>('/api/sign-up', data);
 
