@@ -177,4 +177,3 @@ export default function SendMessage() {
     </div>
   );
 }
-export default Page;
