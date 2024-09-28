@@ -35,8 +35,9 @@ const initialMessageString =
   "What's your favorite movie?||Do you have any pets?||What's your dream job?";
 
 export default function SendMessage() {
-  const params = useParams();
-  const username = params.username as string;
+  const params = useParams<{ username: string }>();
+  const username = params.username;
+
   const {
     complete,
     completion,
